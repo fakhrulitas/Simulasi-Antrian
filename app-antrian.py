@@ -45,24 +45,27 @@ if mu > lambda_:
     st.write(f"**W (Waktu di Sistem):** {format_waktu(W)}")
     st.write(f"**Wq (Waktu Tunggu dalam Antrean):** {format_waktu(Wq)}")
 
-    # Visualisasi 
+    # Visualisasi
     st.subheader("📉 Diagram Antrian (W dan Wq)")
 
-    if W < 1 and Wq < 1:
-        waktu_satuan = "menit"
-        w_plot = W * 60
-        wq_plot = Wq * 60
+    # Tentukan satuan dan ubah nilai jika perlu
+    if max(W, Wq) < 1:
+        satuan = "menit"
+        W_plot = W * 60
+        Wq_plot = Wq * 60
     else:
-        waktu_satuan = "jam"
-        w_plot = W
-        wq_plot = Wq
+        satuan = "jam"
+        W_plot = W
+        Wq_plot = Wq
 
+    # Buat diagram batang
     fig, ax = plt.subplots()
-    ax.bar(["W (Sistem)", "Wq (Antrean)"], [w_plot, wq_plot], color=["skyblue", "salmon"])
-    ax.set_ylabel(f"Waktu ({waktu_satuan})")
-    ax.set_title("Visualisasi Waktu Antrian")
+    ax.bar(["W (Sistem)", "Wq (Antrean)"], [W_plot, Wq_plot], color=["skyblue", "salmon"])
+    ax.set_ylabel(f"Waktu ({satuan})")  # Ini kini dinamis
+    ax.set_title(f"Visualisasi Waktu Antrian dalam {satuan.capitalize()}")
     ax.set_ylim(bottom=0)
     st.pyplot(fig)
+
 
 else:
     st.error("❌ Nilai μ harus lebih besar dari λ agar sistem stabil (ρ < 1)")
