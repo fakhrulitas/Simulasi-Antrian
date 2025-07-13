@@ -48,11 +48,15 @@ if mu > lambda_:
     # Visualisasi
     st.subheader("📉 Diagram Antrian (W dan Wq)")
 
-    # Tentukan satuan dan ubah nilai jika perlu
-    if max(W, Wq) < 1:
+    # Konversi ke menit
+    W_menit = W * 60
+    Wq_menit = Wq * 60
+
+    # Tentukan apakah pakai satuan menit atau jam
+    if max(W_menit, Wq_menit) <= 60:
         satuan = "menit"
-        W_plot = W * 60
-        Wq_plot = Wq * 60
+        W_plot = W_menit
+        Wq_plot = Wq_menit
     else:
         satuan = "jam"
         W_plot = W
@@ -61,7 +65,7 @@ if mu > lambda_:
     # Buat diagram batang
     fig, ax = plt.subplots()
     ax.bar(["W (Sistem)", "Wq (Antrean)"], [W_plot, Wq_plot], color=["skyblue", "salmon"])
-    ax.set_ylabel(f"Waktu ({satuan})")  # Ini kini dinamis
+    ax.set_ylabel(f"Waktu ({satuan})")
     ax.set_title(f"Visualisasi Waktu Antrian dalam {satuan.capitalize()}")
     ax.set_ylim(bottom=0)
     st.pyplot(fig)
