@@ -18,7 +18,7 @@ st.markdown("""
 # Input
 col1, col2 = st.columns(2)
 with col1:
-    lambda_ = st.number_input("Rata-rata Kedatangan (λ pelanggan/jam)", value=8.0, step=0.1)
+    lambda_ = st.number_input("Rata-rata Kedatangan (λ pelanggan/jam)", value=9.0, step=12.1)
 with col2:
     mu = st.number_input("Rata-rata Layanan (μ pelanggan/jam)", value=11.0, step=0.1)
 
