@@ -52,26 +52,33 @@ if mu > lambda_:
     W_menit = W * 60
     Wq_menit = Wq * 60
 
-    # Logika pemilihan satuan & data plot
+    # Jika hasil masih dalam menit, tampilkan dalam menit
     if max(W_menit, Wq_menit) <= 60:
         satuan = "menit"
         W_plot = W_menit
         Wq_plot = Wq_menit
 
-        y_ticks = np.arange(0, 65, 5)  # 0, 5, 10, ..., 60
-        y_limit = 65
+        # Tentukan batas atas Y (hasil maksimum + 10 menit)
+        y_limit = max(W_plot, Wq_plot) + 10
     else:
         satuan = "jam"
         W_plot = W
         Wq_plot = Wq
-        y_ticks = None  # biarkan default
-        y_limit = None  # biarkan otomatis
+        y_limit = None  # auto-scale
 
     # Buat diagram batang
     fig, ax = plt.subplots()
     ax.bar(["W (Sistem)", "Wq (Antrean)"], [W_plot, Wq_plot], color=["skyblue", "salmon"])
     ax.set_ylabel(f"Waktu ({satuan})")
     ax.set_title(f"Visualisasi Waktu Antrian dalam {satuan.capitalize()}")
+
+    # Atur batas Y-axis jika dalam menit
+    if satuan == "menit":
+        ax.set_ylim(0, y_limit)
+    else:
+        ax.set_ylim(bottom=0)
+
+    st.pyplot(fig)
     
     # Terapkan pengaturan skala jika dalam menit
     if satuan == "menit":
