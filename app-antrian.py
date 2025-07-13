@@ -45,12 +45,23 @@ if mu > lambda_:
     st.write(f"**W (Waktu di Sistem):** {format_waktu(W)}")
     st.write(f"**Wq (Waktu Tunggu dalam Antrean):** {format_waktu(Wq)}")
 
-    # Visualisasi
+    # Visualisasi 
     st.subheader("📉 Diagram Antrian (W dan Wq)")
+
+    if W < 1 and Wq < 1:
+        waktu_satuan = "menit"
+        w_plot = W * 60
+        wq_plot = Wq * 60
+    else:
+        waktu_satuan = "jam"
+        w_plot = W
+        wq_plot = Wq
+
     fig, ax = plt.subplots()
-    ax.bar(["W (Sistem)", "Wq (Antrean)"], [W, Wq], color=["skyblue", "salmon"])
-    ax.set_ylabel("Waktu (jam)")
+    ax.bar(["W (Sistem)", "Wq (Antrean)"], [w_plot, wq_plot], color=["skyblue", "salmon"])
+    ax.set_ylabel(f"Waktu ({waktu_satuan})")
     ax.set_title("Visualisasi Waktu Antrian")
+    ax.set_ylim(bottom=0)
     st.pyplot(fig)
 
 else:
