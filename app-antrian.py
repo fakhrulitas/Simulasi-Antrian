@@ -80,15 +80,6 @@ if mu > lambda_:
 
     st.pyplot(fig)
     
-    # Terapkan pengaturan skala jika dalam menit
-    if satuan == "menit":
-        ax.set_yticks(y_ticks)
-        ax.set_ylim(0, y_limit)
-    else:
-        ax.set_ylim(bottom=0)
-
-    st.pyplot(fig)
-
 
 else:
     st.error("❌ Nilai μ harus lebih besar dari λ agar sistem stabil (ρ < 1)")
