@@ -22,6 +22,13 @@ with col1:
 with col2:
     mu = st.number_input("Rata-rata Layanan (μ pelanggan/jam)", value=11.0, step=0.1)
 
+# Fungsi bantu untuk format waktu
+def format_waktu(w):
+    if w < 1:
+        return f"{w * 60:.2f} menit"
+    else:
+        return f"{w:.2f} jam"
+
 # Validasi dan Perhitungan
 if mu > lambda_:
     rho = lambda_ / mu                  # Utilisasi sistem
@@ -35,8 +42,8 @@ if mu > lambda_:
     st.write(f"**ρ (Utilisasi Sistem):** {rho:.2f}")
     st.write(f"**L (Pelanggan dalam Sistem):** {L:.2f}")
     st.write(f"**Lq (Pelanggan dalam Antrean):** {Lq:.2f}")
-    st.write(f"**W (Waktu di Sistem):** {W:.2f} jam")
-    st.write(f"**Wq (Waktu Tunggu dalam Antrean):** {Wq:.2f} jam")
+    st.write(f"**W (Waktu di Sistem):** {format_waktu(W)}")
+    st.write(f"**Wq (Waktu Tunggu dalam Antrean):** {format_waktu(Wq)}")
 
     # Visualisasi
     st.subheader("📉 Diagram Antrian (W dan Wq)")
