@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="Model Antrian M/M/1", layout="wide")
+st.set_page_config(page_title="Model Antrian M/M/1", layout="centered")
 
 st.title("📈 MODEL ANTRIAN – M/M/1")
 
